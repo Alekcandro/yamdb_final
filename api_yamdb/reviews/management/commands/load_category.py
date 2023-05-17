@@ -2,7 +2,6 @@ from csv import DictReader
 
 from django.conf import settings
 from django.core.management import BaseCommand
-
 from reviews.models import Category
 
 DATA_EXISTS_IN_DATA_BASE = """

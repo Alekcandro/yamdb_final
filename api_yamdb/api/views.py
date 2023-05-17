@@ -12,17 +12,15 @@ from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-
 from reviews.models import Category, Genre, Review, Title
+
 from .filters import TitleFilter
 from .mixins import CreateListDestroyViewSet
 from .permissions import AdminOrReadOnly, IsAdmin, IsAuthorOrReadOnly
-from .serializers import (
-    CategorySerializer, CommentSerializer,
-    CreateUserSerializer, GenreSerializer,
-    GetTokenSerializer, ReadTitleSerializer,
-    ReviewSerializer, TitleSerializer, UserSerializer
-)
+from .serializers import (CategorySerializer, CommentSerializer,
+                          CreateUserSerializer, GenreSerializer,
+                          GetTokenSerializer, ReadTitleSerializer,
+                          ReviewSerializer, TitleSerializer, UserSerializer)
 
 User = get_user_model()
 
@@ -143,12 +141,12 @@ def send_confirmation_code(username, email):
     user = get_object_or_404(User, email=email, username=username)
     confirmation_code = default_token_generator.make_token(user)
     user.confirmation_code = confirmation_code
-    MESSAGE = (
+    message = (
         f'Здравствуйте, {username}!'
         f'Ваш код подтверждения: {user.confirmation_code}'
     )
     send_mail(
-        message=MESSAGE,
+        message=message,
         subject='Confirmation code',
         recipient_list=[user.email],
         from_email=settings.DEFAULT_FROM_EMAIL,
