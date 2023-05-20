@@ -88,7 +88,7 @@ docker-compose exec web python3 manage.py createsuperuser
 docker-compose exec web python3 manage.py dumpdata > fixtures.json
 ```
 
-Остановить можно командой:
+Остановка docker:
 
 ```
 docker-compose down -v
