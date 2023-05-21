@@ -63,8 +63,8 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sudo docker-compose stop
-            sudo docker-compose rm web
+            sudo docker compose stop
+            sudo docker compose rm web
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
@@ -73,15 +73,15 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             
-            docker-compose -f docker-compose.yaml stop web nginx
-            docker-compose -f docker-compose.yaml rm --force web nginx
+            docker compose -f docker-compose.yaml stop web nginx
+            docker compose -f docker-compose.yaml rm --force web nginx
             
             docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:v1.1
             
             docker compose -f docker-compose.yaml up -d
             
             docker exec \
-              -t $(docker-compose -f docker-compose.yaml ps -q web) \
+              -t $(docker compose -f docker-compose.yaml ps -q web) \
               sh -c 'python3 manage.py collectstatic --no-input'
 
   send_message:
