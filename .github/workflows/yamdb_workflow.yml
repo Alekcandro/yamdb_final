@@ -63,8 +63,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker-compose stop
-            sudo docker-compose rm web
+            docker-compose -f docker-compose.yaml stop web nginx
+            docker-compose -f docker-compose.yaml rm --force web nginx
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:v1.1
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
