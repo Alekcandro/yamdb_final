@@ -66,8 +66,8 @@ jobs:
             docker-compose -f docker-compose.yaml stop web nginx
             docker-compose -f docker-compose.yaml rm --force web nginx
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
-            touch .env
-            echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
+
+            echo DB_ENGINE=${{ secrets.DB_ENGINE }} > .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
             echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
